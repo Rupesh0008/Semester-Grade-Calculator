@@ -1,0 +1,98 @@
+create table student(
+    reg_no int PRIMARY KEY,
+    first_name varchar(40),
+    last_name varchar(40),
+    birthday date,
+    gender varchar(1),
+    branch_name varchar(40),
+    email_id varchar(40),
+    phone_number BIGINT
+    );
+    SELECT * from student;
+    insert into student
+    values(20180023,'Rahul','R','2001-02-14','M','Biotechnology','rahulrchapally111@gmail.com',9766352969);
+    INSERT INTO student VALUES(20181079,'Amrutham','Goutham','2001-05-15','M','Civil Engineering','amruthamgoutham@gmail.com',9515065990);
+    INSERT INTO student VALUES(20185114,'Nelki','Sujith','2000-10-22','M','ECE','nelkisujith50@gmail.com',8008700126);
+        INSERT INTO student VALUES(20185138,'Banoth','Charan','2000-05-21','M','ECE','banothcharan@gmail.com',9550490287);
+            INSERT INTO student VALUES(20181060,'Kaveti','Abhiram','2000-12-01','M','Civil Engineering','kavetiabhiram@gmail.com',9704248321);
+                INSERT INTO student VALUES(20186005,'Banoth','Naveen','2000-08-09','M','PIE','naveennayak@gmail.com',6303932264);
+    INSERT INTO student VALUES(20184195,'Gorla','Sai Kiran','2000-03-22','M','CSE','gorlasaikiran@gmail.com',9182127811);
+        INSERT INTO student VALUES(20185129,'MDE','Ganesh','2000-07-16','M','ECE','mdeganesh@gmail.com',6303586811);
+        INSERT INTO student VALUES(20185104,'Gandham','Chandu','2000-08-01','M','ECE','chandugandham@gmail.com',9676118633);
+        INSERT INTO student VALUES(20183015,'Y','Nagendra','2000-10-18','M','Mechanical Engineering','ynagendra@gmail.com',8309300538);
+
+create table course(
+    course_id INT PRIMARY KEY,
+    course_name varchar(40)
+);
+INSERT INTO COURSE VALUES (1,'MATHEMATICS');
+INSERT INTO COURSE VALUES (2,'PHYSICS');
+INSERT INTO COURSE VALUES (3,'CHEMISTRY');
+INSERT INTO COURSE VALUES (4,'COMPUTER_PROGRAMMING');
+select * from course;
+CREATE TABLE attendance(
+    reg_no INT PRIMARY KEY,
+    classes_attended_in_Course1 INT,
+    total_classes_in_Course1 INT,
+    attendance_in_Course1 decimal(4,2),
+    classes_attended_in_Course2 INT,
+    total_classes_in_Course2 INT,
+    attendance_in_Course2 decimal(4,2),
+    classes_attended_in_Course3 INT,
+    total_classes_in_Course3 INT,
+    attendance_in_Course3 decimal(4,2),
+    classes_attended_in_Course4 INT, 
+    total_classes_in_Course4 INT,
+    attendance_in_Course4 decimal(4,2)
+);
+INSERT INTO attendance values(20180023,45,48,93.75,42,50,84,40,45,88.89,37,44,84.09);
+INSERT INTO attendance VALUES(20181079,43,48,89.58,46,50,92,37,45,82.22,40,44,90.91);
+INSERT INTO attendance VALUES(20185114,46,48,95.83,40,50,80,43,45,95.56,39,44,88.64);
+INSERT INTO attendance VALUES(20185138,37,48,77.08,41,50,82,34,45,75.56,42,44,95.45);
+INSERT INTO attendance VALUES(20181060,41,48,85.42,37,50,74,36,45,80,36,44,81.82);
+INSERT INTO attendance VALUES(20186005,46,48,95.83,48,50,96,40,45,88.89,33,44,75);
+INSERT INTO attendance VALUES(20184195,40,48,83.33,44,50,88,39,45,86.67,41,44,93.18);
+INSERT INTO attendance VALUES(20185129,37,48,77.08,46,50,92,42,45,93.33,38,44,86.36);
+INSERT INTO attendance VALUES(20185104,44,48,91.67,43,50,86,41,45,91.11,35,44,79.55);
+INSERT INTO attendance VALUES(20183015,39,48,81.25,45,50,90,38,45,84.44,40,44,90.91);
+select * from attendance;
+CREATE TABLE GRADE(
+    reg_no INT PRIMARY KEY,
+    spi_in_1st_semester decimal(3,2),
+    spi_in_2nd_semester decimal(3,2),
+    cpi decimal(3.2)
+);
+INSERT INTO GRADE VALUES(20180023,6,5.23,5.62);
+INSERT INTO GRADE VALUES(20181079,7.36,5.57,6.47);
+INSERT INTO GRADE VALUES(20185114,5.71,5.23,5.47);
+INSERT INTO GRADE VALUES(20185138,3.75,5.96,5.47);
+INSERT INTO GRADE VALUES(20181060,7.6,7.8,7.70);
+INSERT INTO GRADE VALUES(20186005,5.95,5.23,5.59);
+INSERT INTO GRADE VALUES(20184195,7.14,7.23,7.19);
+INSERT INTO GRADE VALUES(20185129,8,7.63,7.82);
+INSERT INTO GRADE VALUES(20185104,7.28,7.23,7.25);
+INSERT INTO GRADE VALUES(20183015,7.15,8.23,7.69);
+select * from student;
+select * from course;
+select * from attendance;
+select * from GRADE;
+SELECT student.reg_no,student.first_name,student.last_name,attendance.attendance_in_Course1,CONCAT(student.first_name," ",student.last_name," is not eligible for the exam") as "eligibility"
+from student join attendance
+on student.reg_no=attendance.reg_no
+where(attendance_in_Course1<85);
+SELECT student.reg_no,student.first_name,student.last_name,attendance.attendance_in_Course2
+from student join attendance
+on student.reg_no=attendance.reg_no
+where(attendance_in_Course2<85);
+SELECT student.reg_no,student.first_name,student.last_name,attendance.attendance_in_Course3
+from student join attendance
+on student.reg_no=attendance.reg_no
+where(attendance_in_Course3<85);
+SELECT student.reg_no,student.first_name,student.last_name,attendance.attendance_in_Course4
+from student join attendance
+on student.reg_no=attendance.reg_no
+where(attendance_in_Course4<85);
+SELECT student.reg_no,CONCAT(student.first_name," ",student.last_name) as STUDENT_NAME,cpi
+from student join grade
+on student.reg_no=grade.reg_no
+where (cpi>7.00);
